@@ -1,0 +1,7 @@
+[package]
+name = "tfb64"
+version = "0.1.0"
+authors = ["JochemKlingeler <jochem.klingeler@gmail.com>"]
+
+[dependencies]
+base64 = "~0.9.0"
