@@ -1,9 +1,10 @@
-use std::io::Write;
 use std::fs::File;
 use std::io::prelude::*;
+use std::io::Write;
 
 extern crate base64;
-use base64::{encode};
+
+use base64::encode;
 
 fn main() {
     println!("Hello, world!");
@@ -16,7 +17,7 @@ fn main() {
         writeln!(std::io::stderr(), "Usage: tfb64 FILEPATH FILEPATH").unwrap();
         std::process::exit(1); // exit out
     }
-    // First arguement is file location
+    // First argument is file location
     let from_file_dir = arguments.get(0).expect("Oh noes");
     let mut f = File::open(from_file_dir).expect("File not found!");
     let mut content = Vec::new();
@@ -24,6 +25,9 @@ fn main() {
         content.reserve(meta.len() as usize);
     }
     f.read_to_end(&mut content).expect("Unable to read file");
-    let mut f_new = File::create(format!("{}{}", from_file_dir, ".base64")).expect("Could not write file");
-    f_new.write(encode(&content).as_bytes()).expect("Unable to write into file");
+    let mut f_new =
+        File::create(format!("{}{}", from_file_dir, ".base64")).expect("Could not write file");
+    f_new
+        .write(encode(&content).as_bytes())
+        .expect("Unable to write into file");
 }
